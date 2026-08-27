@@ -1,178 +1,1198 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CineTV - Movies & TV Shows</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CineTV - Movies & TV Shows</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #09090d;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    height: 70px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background: #09090d;
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 29px;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #e50914;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
+
+.search-box {
+    margin-left: auto;
+    display: flex;
+}
+
+.search-box input {
+    width: 200px;
+    height: 38px;
+    padding: 0 12px;
+    background: #17171d;
+    border: 1px solid #333;
+    color: white;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-box button {
+    width: 42px;
+    border: none;
+    background: #e50914;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
+
+/* HERO */
+.hero {
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    padding: 80px 7%;
+    position: relative;
+    background:
+        linear-gradient(90deg, #09090d 5%, rgba(9,9,13,.9) 35%, rgba(9,9,13,.2)),
+        linear-gradient(0deg, #09090d 0%, transparent 30%),
+        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1800")
+        center/cover;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-label {
+    color: #e50914;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 7vw, 78px);
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.hero-meta {
+    color: #ddd;
+    margin-bottom: 18px;
+}
+
+.hero-description {
+    color: #bbb;
+    line-height: 1.7;
+    max-width: 520px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.btn {
+    padding: 13px 22px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #e50914;
+    color: white;
+}
+
+.btn-secondary {
+    background: #333;
+    color: white;
+}
+
+.btn:hover {
+    opacity: .85;
+}
+
+/* SECTIONS */
+.section {
+    padding: 45px 5%;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.section-header h2 {
+    font-size: 25px;
+}
+
+.view-all {
+    background: none;
+    border: none;
+    color: #e50914;
+    cursor: pointer;
+}
+
+/* MOVIES */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+}
+
+.movie-card {
+    background: #15151b;
+    border-radius: 7px;
+    overflow: hidden;
+    transition: .25s;
+}
+
+.movie-card:hover {
+    transform: translateY(-7px);
+}
+
+.poster {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    display: block;
+}
+
+.movie-info {
+    padding: 13px;
+}
+
+.movie-info h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.movie-info p {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.watch-btn {
+    width: 100%;
+    padding: 9px;
+    border: none;
+    border-radius: 4px;
+    background: #e50914;
+    color: white;
+    cursor: pointer;
+}
+
+/* CATEGORIES */
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.category {
+    padding: 12px 24px;
+    border: 1px solid #333;
+    border-radius: 30px;
+    background: #15151b;
+    color: white;
+    cursor: pointer;
+}
+
+.category:hover {
+    background: #e50914;
+    border-color: #e50914;
+}
+
+/* SUBSCRIBE */
+.subscribe {
+    margin: 30px 5% 60px;
+    padding: 60px 20px;
+    background: #15151b;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.subscribe h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.subscribe p {
+    color: #999;
+    margin-bottom: 25px;
+}
+
+/* FOOTER */
+footer {
+    padding: 35px 5%;
+    border-top: 1px solid #222;
+    color: #777;
+}
+
+footer .logo {
+    color: white;
+}
+
+footer p {
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.88);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-box {
+    width: min(850px, 100%);
+    background: #15151b;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,.8);
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.video-area {
+    height: 430px;
+    background: #030305;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.play-icon {
+    font-size: 60px;
+    color: #e50914;
+}
+
+.video-area p {
+    color: #777;
+    margin-top: 10px;
+}
+
+.modal-info {
+    padding: 25px;
+}
+
+.modal-info h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.modal-info p {
+    color: #999;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+/* NO RESULTS */
+.no-results {
+    display: none;
+    color: #888;
+    padding: 30px 0;
+}
+
+/* MOBILE */
+@media(max-width:1100px) {
+    .movie-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media(max-width:750px) {
+
+    .navbar {
+        height: auto;
+        padding: 15px 5%;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .nav-links {
+        width: 100%;
+        order: 3;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+
+    .search-box {
+        margin-left: auto;
+    }
+
+    .search-box input {
+        width: 140px;
+    }
+
+    .hero {
+        min-height: 500px;
+        padding: 50px 7%;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .poster {
+        height: 230px;
+    }
+
+    .video-area {
+        height: 260px;
+    }
+}
+
+@media(max-width:450px) {
+
+    .logo {
+        font-size: 25px;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .poster {
+        height: 190px;
+    }
+
+    .movie-info {
+        padding: 9px;
+    }
+
+    .movie-info h3 {
+        font-size: 14px;
+    }
+
+    .movie-info p {
+        font-size: 11px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-  <header class="navbar">
-    <div class="logo">Cine<span>TV</span></div>
+<!-- NAVBAR -->
+<header class="navbar">
 
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#movies">Movies</a>
-      <a href="#series">TV Shows</a>
-      <a href="#popular">Popular</a>
-    </nav>
-
-    <div class="nav-right">
-      <input id="searchInput" type="text" placeholder="Search movies...">
-      <button class="search-btn">🔍</button>
+    <div class="logo">
+        Cine<span>TV</span>
     </div>
-  </header>
 
-  <main>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#movies">Movies</a></li>
+        <li><a href="#series">TV Shows</a></li>
+        <li><a href="#popular">Popular</a></li>
+    </ul>
 
-    <!-- Hero -->
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <p class="tag">CineTV Original</p>
-        <h1>The Last Journey</h1>
-        <p class="info">2026 • 2h 18m • Action • Adventure</p>
-        <p class="description">
-          A legendary explorer begins one final journey into an unknown world
-          where nothing is what it seems.
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search..."
+        >
+        <button onclick="searchMovies()">🔍</button>
+    </div>
+
+</header>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="hero-label">
+            CINE TV ORIGINAL
+        </div>
+
+        <h1>
+            The Last Journey
+        </h1>
+
+        <div class="hero-meta">
+            2026 &nbsp; • &nbsp; 2h 18m &nbsp; • &nbsp; Action
+        </div>
+
+        <p class="hero-description">
+            A legendary explorer begins one final journey into
+            an unknown world where nothing is what it seems.
         </p>
 
         <div class="hero-buttons">
-          <button class="play-btn" onclick="openMovie('The Last Journey')">
-            ▶ Play Now
-          </button>
-          <button class="more-btn" onclick="openMovie('The Last Journey')">
-            + More Info
-          </button>
+
+            <button
+                class="btn btn-primary"
+                onclick="openMovie('The Last Journey')"
+            >
+                ▶ Play Now
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="openMovie('The Last Journey')"
+            >
+                + More Info
+            </button>
+
         </div>
-      </div>
-    </section>
 
-    <!-- Trending -->
-    <section class="section" id="popular">
-      <div class="section-title">
-        <h2>Trending Now</h2>
-        <button onclick="showAll()">View All</button>
-      </div>
-
-      <div class="movie-grid" id="movieGrid">
-
-        <article class="movie-card" data-title="The Last Journey">
-          <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600" alt="The Last Journey">
-          <div class="movie-info">
-            <h3>The Last Journey</h3>
-            <p>2026 • Action</p>
-            <button onclick="openMovie('The Last Journey')">▶ Watch</button>
-          </div>
-        </article>
-
-        <article class="movie-card" data-title="Dark City">
-          <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=600" alt="Dark City">
-          <div class="movie-info">
-            <h3>Dark City</h3>
-            <p>2026 • Thriller</p>
-            <button onclick="openMovie('Dark City')">▶ Watch</button>
-          </div>
-        </article>
-
-        <article class="movie-card" data-title="Lost Planet">
-          <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=600" alt="Lost Planet">
-          <div class="movie-info">
-            <h3>Lost Planet</h3>
-            <p>2025 • Sci-Fi</p>
-            <button onclick="openMovie('Lost Planet')">▶ Watch</button>
-          </div>
-        </article>
-
-        <article class="movie-card" data-title="Night Runner">
-          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600" alt="Night Runner">
-          <div class="movie-info">
-            <h3>Night Runner</h3>
-            <p>2025 • Crime</p>
-            <button onclick="openMovie('Night Runner')">▶ Watch</button>
-          </div>
-        </article>
-
-        <article class="movie-card" data-title="Beyond Earth">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600" alt="Beyond Earth">
-          <div class="movie-info">
-            <h3>Beyond Earth</h3>
-            <p>2026 • Sci-Fi</p>
-            <button onclick="openMovie('Beyond Earth')">▶ Watch</button>
-          </div>
-        </article>
-
-        <article class="movie-card" data-title="Final Mission">
-          <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=600" alt="Final Mission">
-          <div class="movie-info">
-            <h3>Final Mission</h3>
-            <p>2025 • Action</p>
-            <button onclick="openMovie('Final Mission')">▶ Watch</button>
-          </div>
-        </article>
-
-      </div>
-
-      <p id="noResults">No movies found.</p>
-    </section>
-
-    <!-- Categories -->
-    <section class="section">
-      <div class="section-title">
-        <h2>Browse Categories</h2>
-      </div>
-
-      <div class="categories">
-        <button onclick="filterCategory('Action')">Action</button>
-        <button onclick="filterCategory('Thriller')">Thriller</button>
-        <button onclick="filterCategory('Sci-Fi')">Sci-Fi</button>
-        <button onclick="filterCategory('Crime')">Crime</button>
-        <button onclick="filterCategory('Comedy')">Comedy</button>
-        <button onclick="filterCategory('Drama')">Drama</button>
-      </div>
-    </section>
-
-    <!-- Subscribe -->
-    <section class="subscribe">
-      <h2>Watch unlimited movies with CineTV</h2>
-      <p>Enjoy your favorite movies and shows anytime.</p>
-      <button onclick="subscribe()">Get Started</button>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="logo">Cine<span>TV</span></div>
-    <p>© 2026 CineTV. All rights reserved.</p>
-  </footer>
-
-  <!-- Movie Modal -->
-  <div class="modal" id="movieModal">
-    <div class="modal-content">
-      <button class="close" onclick="closeMovie()">×</button>
-
-      <div class="video-placeholder">
-        <div>
-          <span>▶</span>
-          <p>Movie Player</p>
-        </div>
-      </div>
-
-      <div class="modal-details">
-        <h2 id="modalTitle">Movie Title</h2>
-        <p>
-          2026 • HD • 2h 10m
-        </p>
-        <p>
-          This is a demo movie page for CineTV. Replace this player with
-          your own legally licensed movie/video content.
-        </p>
-
-        <button class="play-btn">▶ Start Watching</button>
-      </div>
     </div>
-  </div>
 
-  <script src="script.js"></script>
+</section>
+
+
+<!-- MOVIES -->
+<section class="section" id="movies">
+
+    <div class="section-header">
+        <h2>Trending Now</h2>
+
+        <button
+            class="view-all"
+            onclick="showAll()"
+        >
+            View All
+        </button>
+    </div>
+
+
+    <div class="movie-grid" id="movieGrid">
+
+
+        <!-- MOVIE 1 -->
+        <article
+            class="movie-card"
+            data-title="The Last Journey"
+            data-category="Action"
+        >
+
+            <img
+                class="poster"
+                src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=700"
+                alt="The Last Journey"
+            >
+
+            <div class="movie-info">
+
+                <h3>The Last Journey</h3>
+
+                <p>
+                    2026 • Action
+                </p>
+
+                <button
+                    class="watch-btn"
+                    onclick="openMovie('The Last Journey')"
+                >
+                    ▶ Watch
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- MOVIE 2 -->
+        <article
+            class="movie-card"
+            data-title="Dark City"
+            data-category="Thriller"
+        >
+
+            <img
+                class="poster"
+                src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=700"
+                alt="Dark City"
+            >
+
+            <div class="movie-info">
+
+                <h3>Dark City</h3>
+
+                <p>
+                    2026 • Thriller
+                </p>
+
+                <button
+                    class="watch-btn"
+                    onclick="openMovie('Dark City')"
+                >
+                    ▶ Watch
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- MOVIE 3 -->
+        <article
+            class="movie-card"
+            data-title="Lost Planet"
+            data-category="Sci-Fi"
+        >
+
+            <img
+                class="poster"
+                src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=700"
+                alt="Lost Planet"
+            >
+
+            <div class="movie-info">
+
+                <h3>Lost Planet</h3>
+
+                <p>
+                    2025 • Sci-Fi
+                </p>
+
+                <button
+                    class="watch-btn"
+                    onclick="openMovie('Lost Planet')"
+                >
+                    ▶ Watch
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- MOVIE 4 -->
+        <article
+            class="movie-card"
+            data-title="Night Runner"
+            data-category="Crime"
+        >
+
+            <img
+                class="poster"
+                src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=700"
+                alt="Night Runner"
+            >
+
+            <div class="movie-info">
+
+                <h3>Night Runner</h3>
+
+                <p>
+                    2025 • Crime
+                </p>
+
+                <button
+                    class="watch-btn"
+                    onclick="openMovie('Night Runner')"
+                >
+                    ▶ Watch
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- MOVIE 5 -->
+        <article
+            class="movie-card"
+            data-title="Beyond Earth"
+            data-category="Sci-Fi"
+        >
+
+            <img
+                class="poster"
+                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700"
+                alt="Beyond Earth"
+            >
+
+            <div class="movie-info">
+
+                <h3>Beyond Earth</h3>
+
+                <p>
+                    2026 • Sci-Fi
+                </p>
+
+                <button
+                    class="watch-btn"
+                    onclick="openMovie('Beyond Earth')"
+                >
+                    ▶ Watch
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- MOVIE 6 -->
+        <article
+            class="movie-card"
+            data-title="Final Mission"
+            data-category="Action"
+        >
+
+            <img
+                class="poster"
+                src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=700"
+                alt="Final Mission"
+            >
+
+            <div class="movie-info">
+
+                <h3>Final Mission</h3>
+
+                <p>
+                    2025 • Action
+                </p>
+
+                <button
+                    class="watch-btn"
+                    onclick="openMovie('Final Mission')"
+                >
+                    ▶ Watch
+                </button>
+
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <div
+        class="no-results"
+        id="noResults"
+    >
+        No movies found.
+    </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+<section class="section" id="popular">
+
+    <div class="section-header">
+        <h2>Browse Categories</h2>
+    </div>
+
+    <div class="categories">
+
+        <button
+            class="category"
+            onclick="filterCategory('Action')"
+        >
+            Action
+        </button>
+
+        <button
+            class="category"
+            onclick="filterCategory('Thriller')"
+        >
+            Thriller
+        </button>
+
+        <button
+            class="category"
+            onclick="filterCategory('Sci-Fi')"
+        >
+            Sci-Fi
+        </button>
+
+        <button
+            class="category"
+            onclick="filterCategory('Crime')"
+        >
+            Crime
+        </button>
+
+        <button
+            class="category"
+            onclick="filterCategory('Comedy')"
+        >
+            Comedy
+        </button>
+
+        <button
+            class="category"
+            onclick="filterCategory('Drama')"
+        >
+            Drama
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- TV SHOWS -->
+<section
+    class="section"
+    id="series"
+>
+
+    <div class="section-header">
+        <h2>Popular TV Shows</h2>
+    </div>
+
+    <div class="movie-grid">
+
+        <article class="movie-card">
+
+            <img
+                class="poster"
+                src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=700"
+                alt="The Agency"
+            >
+
+            <div class="movie-info">
+
+                <h3>The Agency</h3>
+
+                <p>2026 • Drama</p>
+
+                <button
+                    class="watch-btn"
+                    onclick="openMovie('The Agency')"
+                >
+                    ▶ Watch
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="movie-card">
+
+            <img
+                class="poster"
+                src="https://images.unsplash.com/photo-1586899028174-e7098604235b?w=700"
+                alt="Hidden Files"
+            >
+
+            <div class="movie-info">
+
+                <h3>Hidden Files</h3>
+
+                <p>2026 • Mystery</p>
+
+                <button
+                    class="watch-btn"
+                    onclick="openMovie('Hidden Files')"
+                >
+                    ▶ Watch
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="movie-card">
+
+            <img
+                class="poster"
+                src="https://images.unsplash.com/photo-1512070679279-c2f999098c01?w=700"
+                alt="The Code"
+            >
+
+            <div class="movie-info">
+
+                <h3>The Code</h3>
+
+                <p>2025 • Thriller</p>
+
+                <button
+                    class="watch-btn"
+                    onclick="openMovie('The Code')"
+                >
+                    ▶ Watch
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="movie-card">
+
+            <img
+                class="poster"
+                src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=700"
+                alt="After Midnight"
+            >
+
+            <div class="movie-info">
+
+                <h3>After Midnight</h3>
+
+                <p>2026 • Drama</p>
+
+                <button
+                    class="watch-btn"
+                    onclick="openMovie('After Midnight')"
+                >
+                    ▶ Watch
+                </button>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- SUBSCRIBE -->
+<section class="subscribe">
+
+    <h2>
+        Watch unlimited entertainment with CineTV
+    </h2>
+
+    <p>
+        Enjoy movies and TV shows anytime, anywhere.
+    </p>
+
+    <button
+        class="btn btn-primary"
+        onclick="subscribe()"
+    >
+        Get Started
+    </button>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="logo">
+        Cine<span>TV</span>
+    </div>
+
+    <p>
+        © 2026 CineTV. All rights reserved.
+    </p>
+
+</footer>
+
+
+<!-- MOVIE MODAL -->
+<div
+    class="modal"
+    id="movieModal"
+>
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            onclick="closeMovie()"
+        >
+            ×
+        </button>
+
+        <div class="video-area">
+
+            <div>
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+                <p>
+                    CineTV Movie Player
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-info">
+
+            <h2 id="modalTitle">
+                Movie Title
+            </h2>
+
+            <p>
+                2026 • HD • 2h 10m
+            </p>
+
+            <p>
+                This is a CineTV demo player. Replace this
+                area with your own legally licensed video
+                content.
+            </p>
+
+            <button
+                class="btn btn-primary"
+                onclick="startMovie()"
+            >
+                ▶ Start Watching
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* SEARCH */
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const movieCards =
+    document.querySelectorAll(".movie-card");
+
+const noResults =
+    document.getElementById("noResults");
+
+
+function searchMovies() {
+
+    const search =
+        searchInput.value
+        .toLowerCase()
+        .trim();
+
+    let found = 0;
+
+    movieCards.forEach(card => {
+
+        const title =
+            (card.dataset.title || card.querySelector("h3")?.textContent || "")
+            .toLowerCase();
+
+        if (title.includes(search)) {
+
+            card.style.display = "block";
+            found++;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+    noResults.style.display =
+        found === 0 ? "block" : "none";
+}
+
+
+searchInput.addEventListener(
+    "input",
+    searchMovies
+);
+
+
+/* MOVIE MODAL */
+
+function openMovie(title) {
+
+    document.getElementById("modalTitle")
+        .textContent = title;
+
+    document.getElementById("movieModal")
+        .style.display = "flex";
+
+    document.body.style.overflow = "hidden";
+}
+
+
+function closeMovie() {
+
+    document.getElementById("movieModal")
+        .style.display = "none";
+
+    document.body.style.overflow = "auto";
+}
+
+
+document.getElementById("movieModal")
+    .addEventListener("click", function(event) {
+
+        if (event.target === this) {
+            closeMovie();
+        }
+
+    });
+
+
+/* CATEGORY FILTER */
+
+function filterCategory(category) {
+
+    let found = 0;
+
+    movieCards.forEach(card => {
+
+        const cardCategory =
+            card.dataset.category || "";
+
+        if (cardCategory === category) {
+
+            card.style.display = "block";
+            found++;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+    noResults.style.display =
+        found === 0 ? "block" : "none";
+
+    document.getElementById("movies")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+/* SHOW ALL */
+
+function showAll() {
+
+    movieCards.forEach(card => {
+
+        card.style.display = "block";
+
+    });
+
+    noResults.style.display = "none";
+
+    searchInput.value = "";
+}
+
+
+/* SUBSCRIBE */
+
+function subscribe() {
+
+    alert(
+        "Welcome to CineTV! Subscription system coming soon."
+    );
+
+}
+
+
+/* START MOVIE */
+
+function startMovie() {
+
+    alert(
+        "Demo player. Add your licensed video URL here."
+    );
+
+}
+
+
+/* ESCAPE KEY */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+            closeMovie();
+        }
+
+    }
+);
+
+</script>
+
 </body>
 </html>
+```
